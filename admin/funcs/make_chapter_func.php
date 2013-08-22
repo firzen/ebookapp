@@ -36,7 +36,7 @@
 		$smarty->assign("article",$article);
 		$smarty->assign("title",$title);
 		$smarty->assign("chpctx",$chpctx);
-		$novel = $smarty->fetch('chpctx.htm');
+		$novel = $smarty->fetch('chpctx_bootstrap.htm');
 		makehtml(WEB_ROOT.$localurl,$novel);
 	}
 	

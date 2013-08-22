@@ -21,7 +21,7 @@
 		$smarty->assign("title",$artile);
 		$smarty->assign("chapter",$arr);
 		//$smarty->display("chplst.htm");
-		$content = $smarty->fetch('chplst.htm');
+		$content = $smarty->fetch('chplst_bootstrap.htm');
 		$local_url="data/artiles/".$artileid.".htm";
 		
 		$update_sql="update t_article set local_url='".$local_url."' where id=".$artileid;
