@@ -83,6 +83,8 @@ background-color:palegreen;
 }
 
 #novel_content{
+float:left;
+text-align:left;
 font-size:16px;
 line-height:2.2;
 }
