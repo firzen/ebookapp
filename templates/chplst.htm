@@ -1,0 +1,29 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{$title}</title>
+<link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="book_news book_news_style">
+			<!--div class="book_height ">
+			</div-->
+			<div class="article_listtable">
+			您的位置：<a href="/">首页</a>》{$title}
+			</div>
+			<div class="article_texttitle">
+			正文
+			</div>
+			<div class="article_texttable">
+				<div class ="article_listtext">
+					<ul id="chapterlist">
+						{section name=list loop=$chapter}
+							<li><a href="/{$chapter[list].local_url}" target="_blank">{$chapter[list].title}</a></li>
+						{/section}
+					</ul>
+				</div>
+			</div>
+	</div>
+</body>
+</html>
