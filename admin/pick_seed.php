@@ -4,6 +4,7 @@
 </head>	
  
  <?php
+	include_once "../init.php";
 	include_once "../util/mysql_class.php";
 	include_once "../util/util.php";
 	

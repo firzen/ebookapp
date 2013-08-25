@@ -4,7 +4,7 @@
  * www.php100.com ±à¼­Æ÷½Ì³Ì
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
-	include_once "config.php";
+	include_once  WEB_ROOT."util/config.php";
 	
    class mysql{
 
@@ -14,7 +14,7 @@
 		$user = $GLOBALS ['database'] ['db_user'];
 		$passwd = $GLOBALS ['database'] ['passwd'];
 		$dbname = $GLOBALS ['database'] ['dbname'];
-		$this->connect('localhost',$user,$passwd,$dbname,"gb2312");
+		$this->connect($GLOBALS ['database'] ['hostname'],$user,$passwd,$dbname,"gb2312");
      }
 
 

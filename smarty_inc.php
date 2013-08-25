@@ -1,9 +1,5 @@
 <?php
 
-if (!defined('WEB_ROOT')) {  
-  define('WEB_ROOT', dirname(__FILE__) . '/');  
-}  
-
 include_once(WEB_ROOT."smarty/Smarty.class.php"); //包含smarty类文件
 
 $smarty = new Smarty(); //建立smarty实例对象$smarty

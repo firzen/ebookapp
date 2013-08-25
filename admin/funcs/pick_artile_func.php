@@ -17,6 +17,7 @@
 		//print_r($chplst);
 		
 		foreach($chplst as $id=>$chp){
+			//先判断url是否存在，增量更新
 			$sql_select="select url from t_chapter where artile_id=".$artileid." and url='".$chp["url"]."'";
 		    $query = $db->query($sql_select);
 			if($db->num_rows($query)>0){
@@ -28,7 +29,7 @@
 		}
 		
 		//update_status($artileid,$status);
-		$update_sql = "update t_article set status=".$status." where id=".$artileid;
+		$update_sql = "update t_article set status=".$status.",modify_date=".date('Ymd')." where id=".$artileid;
 		$db->query($update_sql);
 		
 		
@@ -64,6 +65,17 @@
 		}
 		return $status;
 	}
+	/**
+		判断文章是否重新采集
+	**/
+	function is_chapter_updated($articleid){
+		$db =  new mysql();
+		$sql_select="select id from t_article where id=".$articleid." and status=0 and modify_date < '".date('Ymd')."'";
+		$query = $db->query($sql_select);
+		if($db->num_rows($query)>0){
+			return true;
+		}
+		return false;
+	}
 	
-
 ?>

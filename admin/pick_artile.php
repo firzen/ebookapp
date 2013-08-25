@@ -2,6 +2,7 @@
     <meta charset="gb2312">
 </head>	
  <?php
+	include_once "../init.php";
 	include_once "../util/mysql_class.php";
 	include_once "../util/util.php";
 	include_once "funcs/pick_artile_func.php";
