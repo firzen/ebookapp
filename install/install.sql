@@ -28,10 +28,11 @@ CREATE TABLE IF NOT EXISTS `t_article` (
   `seed_id` int(11) NOT NULL,
   `status` int(11) NOT NULL COMMENT '0:连载中 1.已完结',
   `modify_date` varchar(8) NOT NULL COMMENT '修改日期',
+  `click_times` int(11) NOT NULL COMMENT '点击次数',
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`),
   KEY `seed_id` (`seed_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `t_article`
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `t_category` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `t_category`
@@ -57,14 +58,13 @@ CREATE TABLE IF NOT EXISTS `t_category` (
 
 INSERT INTO `t_category` (`id`, `category_name`) VALUES
 (1, '言情小说'),
-(2, '玄幻小说'),
-(5, '都市小说'),
-(4, '仙侠修真'),
-(6, '历史小说'),
-(7, '网游小说'),
-(8, '竞技小说'),
-(9, '科幻小说'),
-(10, '全本小说');
+(2, '仙侠修真'),
+(3, '都市小说'),
+(4, '历史小说'),
+(5, '玄幻小说'),
+(6, '网游小说'),
+(7, '竞技小说'),
+(8, '科幻小说');
 
 -- --------------------------------------------------------
 
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `t_seeds` (
   `category_id` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`)
-) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `t_seeds`
@@ -132,6 +132,10 @@ CREATE TABLE IF NOT EXISTS `t_seeds` (
 
 INSERT INTO `t_seeds` (`id`, `url`, `category_id`) VALUES
 (1, 'http://www.81zw.com/yanqing/', 1),
-(2, 'http://www.81zw.com/xuanhuan/', 2),
-(4, 'http://www.81zw.com/xianxia/', 4),
-(5, 'http://www.81zw.com/lishi/', 6);
+(2, 'http://www.81zw.com/xianxia/', 2),
+(3, 'http://www.81zw.com/dushi/', 3),
+(4, 'http://www.81zw.com/lishi/', 4),
+(5, 'http://www.81zw.com/xuanhuan/', 5),
+(6, 'http://www.81zw.com/wangyou/', 6),
+(7, 'http://www.81zw.com/jingji/', 7),
+(8, 'http://www.81zw.com/xuanhuan/', 8);

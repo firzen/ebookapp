@@ -2,10 +2,12 @@
 	function make_article_func($artileid){
 		global $smarty;
 		$db =  new mysql();
-		$sql_select="select * from t_article where id = ".$artileid;
+		$sql_select="select a.*,b.category_id from t_article a,t_seeds b where a.id = ".$artileid." and a.seed_id = b.id";
+		//echo $sql_select;
 		$query = $db->query($sql_select);
 		$titlerow = $db->fetch_row_array($query);
 		$artile = $titlerow["title"];
+		$category_id = $titlerow["category_id"];
 		echo "title:".$artile."<br>";
 		
 		$sql_select="select * from t_chapter where artile_id=".$artileid." order by id ";
@@ -20,8 +22,9 @@
 	
 		$smarty->assign("title",$artile);
 		$smarty->assign("chapter",$arr);
+		$smarty->assign("activeIdx",$category_id);
 		//$smarty->display("chplst.htm");
-		$content = $smarty->fetch('chplst_bootstrap.htm');
+		$content = $smarty->fetch('chplst_bootstrap_1.htm');
 		$local_url="data/artiles/".$artileid.".htm";
 		
 		$update_sql="update t_article set local_url='".$local_url."' where id=".$artileid;

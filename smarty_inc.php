@@ -20,7 +20,7 @@ $smarty->cache_dir = WEB_ROOT."smarty_cache"; //»º´æÎÄ¼þ¼Ð
 
 //----------------------------------------------------
 
-$smarty->left_delimiter = "{";
+$smarty->left_delimiter = "{#";
 
-$smarty->right_delimiter = "}";
+$smarty->right_delimiter = "#}";
 ?>

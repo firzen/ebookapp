@@ -3,6 +3,7 @@
 	include_once WEB_ROOT."util/mysql_class.php";
 	include_once WEB_ROOT."smarty_inc.php";
 	include_once WEB_ROOT."admin/funcs/make_article_func.php";
+	include_once WEB_ROOT."admin/funcs/app_util_func.php";
 	include_once WEB_ROOT."admin/funcs/make_single_chapter_func.php";
 	include_once WEB_ROOT."util/util.php";
 	

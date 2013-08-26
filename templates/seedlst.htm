@@ -45,15 +45,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					{section name=list loop=$artile}
+					{#section name=list loop=$artile#}
 				<tr>
-					<td><p>{$artile[list].category_name}</p>    </td>
-					<td>{$artile[list].url}</td>
+					<td><p>{#$artile[list].category_name#}</p>    </td>
+					<td>{#$artile[list].url#}</td>
 					<td>
-					<a href="pick_seed.php?seedid={$artile[list].id}">采集</a>
+					<a href="pick_seed.php?seedid={#$artile[list].id#}">采集</a>
 					</td>
 				</tr>
-					{/section}
+					{#/section#}
 				</tbody>
 			</table>
 		</div>

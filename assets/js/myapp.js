@@ -115,4 +115,9 @@ function loadBigUser(pageNumber){
     });
 }
 
+function updateClickTimes(articleid){
+    page = "/track.php";
+    htmlobj=$.ajax({url:page,async:false,data:{articleid:articleid}});
+}
+
 //show_Reguser
