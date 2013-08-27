@@ -1,8 +1,8 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
-RewriteRule ^category_(.*).html$ category.php?id=$1
-RewriteRule ^chapter_lst_(.*).html$ chapter_lst.php?id=$1
-RewriteRule ^chapter_ctx_(.*).html$ chapter_ctx.php?id=$1
+RewriteRule category/(.*)/(.*).html$ category.php?id=$1&page=$2 
+RewriteRule chapter/lst_(.*).html$ chapter_lst.php?id=$1
+RewriteRule chapter/ctx_(.*).html$ chapter_ctx.php?id=$1
 RewriteRule ^t_(.*).html$ test.php?id=$1 [L]
 </IfModule> 

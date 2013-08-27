@@ -11,11 +11,12 @@
 	if(@$_GET["id"]){
 		$chapter_id = $_GET["id"];
 		//data/chapters/1.htm
-		$local_url="data/chapters/".$chapter_id.".htm";
+		$local_url="/data/chapters/".$chapter_id.".htm";
 		$act_file = WEB_ROOT.$local_url;
 		if(!file_exists($act_file)){
 			make_chapter_func($chapter_id);
 		}
+		header('HTTP/1.1 301 Moved Permanently');
 		header("location: ".$local_url);
 	}else{
 		echo "artileid missing";

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 23 日 03:06
+-- 生成日期: 2013 年 08 月 27 日 06:54
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.3
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `t_article` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`),
   KEY `seed_id` (`seed_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `t_article`
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `t_category` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `t_category`
@@ -122,20 +122,24 @@ CREATE TABLE IF NOT EXISTS `t_seeds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(150) NOT NULL,
   `category_id` tinyint(4) NOT NULL,
+  `modify_date` varchar(8) NOT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`)
-) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gb2312 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `t_seeds`
 --
 
-INSERT INTO `t_seeds` (`id`, `url`, `category_id`) VALUES
-(1, 'http://www.81zw.com/yanqing/', 1),
-(2, 'http://www.81zw.com/xianxia/', 2),
-(3, 'http://www.81zw.com/dushi/', 3),
-(4, 'http://www.81zw.com/lishi/', 4),
-(5, 'http://www.81zw.com/xuanhuan/', 5),
-(6, 'http://www.81zw.com/wangyou/', 6),
-(7, 'http://www.81zw.com/jingji/', 7),
-(8, 'http://www.81zw.com/xuanhuan/', 8);
+INSERT INTO `t_seeds` (`id`, `url`, `category_id`, `modify_date`) VALUES
+(1, 'http://www.81zw.com/yanqing/', 1, ''),
+(2, 'http://www.81zw.com/xianxia/', 2, ''),
+(3, 'http://www.81zw.com/dushi/', 3, ''),
+(4, 'http://www.81zw.com/lishi/', 4, ''),
+(5, 'http://www.81zw.com/xuanhuan/', 5, ''),
+(6, 'http://www.81zw.com/wangyou/', 6, ''),
+(7, 'http://www.81zw.com/jingji/', 7, ''),
+(8, 'http://www.81zw.com/yanqing/2.html', 1, ''),
+(9, 'http://www.81zw.com/yanqing/3.html', 1, ''),
+(10, 'http://www.81zw.com/yanqing/4.html', 1, ''),
+(11, 'http://www.81zw.com/kehuan/', 8, '');

@@ -8,6 +8,7 @@
 
 <body>
 <?php
+include_once "../init.php";
 include_once "../util/mysql_class.php";
 
 	if(@$_POST["categoryName"]){

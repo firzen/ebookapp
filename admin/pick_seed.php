@@ -8,33 +8,30 @@
 	include_once "../util/mysql_class.php";
 	include_once "../util/util.php";
 	
-	function main(){
-		$seedid=$_GET["seedid"];
-		$db =  new mysql();
-		$sql_select="select url from t_seeds where id=".$seedid;
-		$query = $db->query($sql_select);
-		$artile = $db->fetch_row_array($query);
-		//print_r($artile);
-		$url=$artile["url"];
-        echo "url:".$url;	
+	function pickURL($seed_id,$seed_url){
+		$db =  new mysql();	
 		//读远程url
-		$chplst = pick_artile($url);
+		$chplst = pick_artile_by_seed($seed_url);
 		//写数据库
 		//print_r($chplst);
 		
 		foreach($chplst as $id=>$chp){
-			$insert_sql="INSERT INTO t_article(seed_id,title,url)VALUES (".$seedid.",'".$chp["title"]."','".$chp["url"]."')";
-			//$insert_sql="INSERT INTO t_article (title ,url,seed_id)VALUES ('".$title."','".$url."')";
-			//echo $insert_sql;
-			$db->query($insert_sql);
+			$articl_url=$chp["url"];
+			if(!is_artile_exsit($articl_url)){
+				$insert_sql="INSERT INTO t_article(seed_id,title,url)VALUES (".$seed_id.",'".$chp["title"]."','".$articl_url."')";
+				$db->query($insert_sql);
+			}
 		}
-		echo "采集完成";
 		
+		$update_sql="update t_seeds set modify_date='".date('Ymd')."' where id=".$seed_id;
+		$db->query($update_sql);
+		
+		echo "采集完成";
 	}
 	
-	function pick_artile($url){
+	function pick_artile_by_seed($seed_url){
 		$domain="http://www.81zw.com";
-		$contents = myfile_get_content($url);
+		$contents = myfile_get_content($seed_url);
 		//$preg1="#<ul id=\"chapterlist\">(.*)</ul>#iUs";
 		//preg_match($preg1,$contents,$cplst);
 		//echo "aa:".$cplst[1];
@@ -49,5 +46,35 @@
 		}
 		return $ret;
 	}
-	main();
+	
+	
+	/**
+		判断文章是否采集过
+	**/
+	function is_artile_exsit($url){
+		$db =  new mysql();
+		$sql_select="select id from t_article where url='".$url."'";
+		$query = $db->query($sql_select);
+		if($db->num_rows($query)>0){
+			return true;
+		}
+		return false;
+	}
+	
+	if(@$_GET["seedid"]){
+		$seedid=$_GET["seedid"];
+		$sql_select="select id,url from t_seeds where id=".$seedid;
+	}else{
+		$sql_select="select id,url from t_seeds where modify_date<'".date('Ymd')."' limit 0,1";
+	}
+	
+	$db =  new mysql();
+	$query = $db->query($sql_select);
+	if($db->num_rows($query)>0){
+		$seed = $db->fetch_row_array($query);
+		$seed_url=$seed["url"];
+		$seed_id=$seed["id"];
+		pickURL($seed_id,$seed_url);
+	}
+	
 ?>

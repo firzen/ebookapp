@@ -20,22 +20,22 @@
 	<td>采集url</td>
 	<td>操作</td>
 </tr>
-{section name=list loop=$artile}
+{#section name=list loop=$artile#}
 <tr>
 	<td>
 	  <input type="checkbox" name="checkboxid" value="{$artile[list].id}">
     </td>
-	<td>{$artile[list].title}</td>
-	<td>{$artile[list].category_name}</td>
-	<td>{$artile[list].url}</td>
+	<td>{#$artile[list].title#}</td>
+	<td>{#$artile[list].category_name#}</td>
+	<td>{#$artile[list].url#}</td>
 	<td>
-	<a href="pick_artile.php?artileid={$artile[list].id}" target="_blank">采集</a>
-	<a href="make_artile.php?artileid={$artile[list].id}&title={$artile[list].title}" target="_blank">生成目录页面</a>
-	<a href="make_chapter.php?artileid={$artile[list].id}&title={$artile[list].title}" target="_blank">生成章节页面</a>
-	<a href="del_artile.php?artileid={$artile[list].id}&title={$artile[list].title}" target="_blank">删除文章</a>
+	<a href="pick_artile.php?artileid={#$artile[list].id#}" target="_blank">采集</a>
+	<a href="make_artile.php?artileid={#$artile[list].id#}&title={#$artile[list].title#}" target="_blank">生成目录页面</a>
+	<a href="make_chapter.php?artileid={#$artile[list].id#}&title={#$artile[list].title#}" target="_blank">生成章节页面</a>
+	<a href="del_artile.php?artileid={#$artile[list].id#}&title={#$artile[list].title#}" target="_blank">删除文章</a>
 	</td>
 </tr>
-{/section}
+{#/section#}
 </form>
 </table>
 

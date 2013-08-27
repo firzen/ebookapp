@@ -10,7 +10,7 @@
 	$db =  new mysql();
 	if(@$_GET["id"]){
 		$artileid = $_GET["id"];
-		$local_url="data/artiles/".$artileid.".htm";
+		$local_url="/data/artiles/".$artileid.".htm";
 		//$act_file = WEB_ROOT.$local_url;
 		
 		if(is_chapter_updated($artileid)){
@@ -19,7 +19,7 @@
 			make_article_func($artileid);
 		}
 		//echo "bb";
-		
+		header('HTTP/1.1 301 Moved Permanently');
 		header("location: ".$local_url);
 	}else{
 		echo "artileid missing";
