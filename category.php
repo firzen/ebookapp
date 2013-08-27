@@ -14,8 +14,8 @@
 		$pageNo=1;
 	}
 	$startIdx = ($pageNo-1)*15;
-	$endIdx = $pageNo*15;
-	$sql_select="select a.*,c.category_name from t_article a,t_seeds b,t_category c where a.seed_id = b.id and b.category_id=c.id ".$category_sql." order by a.click_times desc limit ".$startIdx.",".$endIdx;
+	//$endIdx = $pageNo*15;
+	$sql_select="select a.*,c.category_name from t_article a,t_seeds b,t_category c where a.seed_id = b.id and b.category_id=c.id ".$category_sql." order by a.click_times desc limit ".$startIdx.",15";
 	//echo $sql_select;
 	$query = $db->query($sql_select);
 	while($row=$db->fetch_row_array($query)){
@@ -36,7 +36,7 @@
 	$pagination="";
 	if($pageNo==1&$pageNo<$maxPg){
 		$pagination = "<li><a href=\"/category/".$category_id."/".($pageNo+1).".html\">Next</a></li>";
-	} else if($pageNo==$maxPg&$pageNo>=$maxPg){
+	} else if($pageNo==$maxPg&$pageNo>=$maxPg&$pageNo>1){
 		$pagination = "<li><a href=\"/category/".$category_id."/".($pageNo-1).".html\">Prev</a></li>";
 	} else if($pageNo<$maxPg){
 		$pagination = "<li><a href=\"/category/".$category_id."/".($pageNo-1).".html\">Prev</a></li><li><a href=\"/category/".$category_id."/".($pageNo+1).".html\">Next</a></li>";
