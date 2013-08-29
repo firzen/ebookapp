@@ -14,10 +14,19 @@
 		$local_url="/data/chapters/".$chapter_id.".htm";
 		$act_file = WEB_ROOT.$local_url;
 		if(!file_exists($act_file)){
-			make_chapter_func($chapter_id);
+			try{
+				make_chapter_func($chapter_id,false);
+			}catch(Exception $e){
+				
+			}
 		}
-		header('HTTP/1.1 301 Moved Permanently');
-		header("location: ".$local_url);
+		
+		if(file_exists($act_file)){
+			echo read_file_content($act_file);
+		}else{
+			showErrorPage($chapter_id);
+		}
+		
 	}else{
 		echo "artileid missing";
 	}

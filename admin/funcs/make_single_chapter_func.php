@@ -1,16 +1,23 @@
 <?php
 	include_once WEB_ROOT."util/util.php";
 	
-	function make_chapter_func($id){
+	function make_chapter_func($id,$debug){
 		$db =  new mysql();
 		$sql_select="select * from t_chapter where  id=".$id;
 		$query = $db->query($sql_select);
 		$count = 0;
 		
 		while($row=$db->fetch_row_array($query)){
-			echo "开始采集 ".$row["url"]."->".$row["local_url"]."<br>";
+		
+			if($debug){
+				echo "开始采集 ".$row["url"]."->".$row["local_url"]."<br>";
+			}
+			
 			makechaptercontent($id,$row["url"],$row["local_url"],$row["title"],$row["artile_id"]);
-			echo "采集".$row["url"]."完成<br>";
+			
+			if($debug){
+				echo "采集".$row["url"]."完成<br>";
+			}
 			
 			$update_sql="update t_chapter set collect_flag=1 where id=".$row["id"];
 			$db->query($update_sql);
@@ -41,6 +48,12 @@
 		$smarty->assign("chpctx",$chpctx);
 		$novel = $smarty->fetch('chpctx_bootstrap_1.htm');
 		makehtml(WEB_ROOT.$localurl,$novel);
+	}
+	
+	function showErrorPage($id){
+		global $smarty;
+		$smarty->assign("id",$id);
+		$smarty->display("chpctx_bootstrap_error.htm");
 	}
 	
 ?>
