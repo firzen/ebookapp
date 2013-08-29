@@ -1,5 +1,5 @@
 <?php
-	function make_article_func($artileid){
+	function make_article_func($artileid,$debug){
 		global $smarty;
 		$db =  new mysql();
 		$sql_select="select a.*,b.category_id from t_article a,t_seeds b where a.id = ".$artileid." and a.seed_id = b.id";
@@ -8,8 +8,9 @@
 		$titlerow = $db->fetch_row_array($query);
 		$artile = $titlerow["title"];
 		$category_id = $titlerow["category_id"];
-		echo "title:".$artile."<br>";
-		
+		if($debug){
+			echo "title:".$artile."<br>";
+		}
 		$sql_select="select * from t_chapter where artile_id=".$artileid." order by id ";
 		$query = $db->query($sql_select);
 		
@@ -32,7 +33,9 @@
 		
 		makehtml(WEB_ROOT.$local_url,$content);
 		
-		echo "<a href='".$GLOBALS ['web'] ['base'].$local_url."'>生成文章目录页成功</a>";
+		if($debug){
+			echo "<a href='".$GLOBALS ['web'] ['base'].$local_url."'>生成文章目录页成功</a>";
+		}
 	}
 	
 	function get_article_title($artileid){

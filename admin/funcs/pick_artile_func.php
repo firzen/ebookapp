@@ -1,17 +1,23 @@
 <?php
-	function pick_article($artileid){
+	function pick_article($artileid,$debug){
 		$db =  new mysql();
 		$sql_select="select url from t_article where id=".$artileid;
 		$query = $db->query($sql_select);
 		$artile = $db->fetch_row_array($query);
 		//print_r($artile);
 		$baseurl=$artile["url"];
-        echo "url:".$baseurl."<br>";	
+		if($debug){
+			echo "url:".$baseurl."<br>";
+		}	
 		//读远程url
 		
 		$contents = myfile_get_content($baseurl);
+		//echo $contents;
 		$status = get_status($contents);
-		echo "status:".$status;
+		if($debug){
+			echo "status:".$status;
+		}
+		
 		$chplst = pick_artile_content($contents,$baseurl);
 		//写数据库
 		//print_r($chplst);
@@ -21,19 +27,24 @@
 			$sql_select="select url from t_chapter where artile_id=".$artileid." and url='".$chp["url"]."'";
 		    $query = $db->query($sql_select);
 			if($db->num_rows($query)>0){
-				echo "exsit url:[" .$chp["url"]."]<br>";
+				//echo "exsit url:[" .$chp["url"]."]<br>";
 				continue;
+			}else{
+				$insert_sql="INSERT INTO t_chapter(artile_id,title,url)VALUES (".$artileid.",'".$chp["title"]."','".$chp["url"]."')";
+				$db->query($insert_sql);
+				if($debug){
+					echo "insert url:" .$chp["url"]."]<br>";
+				}	
 			}
-			$insert_sql="INSERT INTO t_chapter(artile_id,title,url)VALUES (".$artileid.",'".$chp["title"]."','".$chp["url"]."')";
-			$db->query($insert_sql);
 		}
 		
 		//update_status($artileid,$status);
 		$update_sql = "update t_article set status=".$status.",modify_date=".date('Ymd')." where id=".$artileid;
 		$db->query($update_sql);
 		
-		
-		echo "采集完成";
+		if($debug){
+			echo "采集完成";
+		}
 		
 	}
 	
