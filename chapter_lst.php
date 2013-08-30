@@ -14,7 +14,7 @@
 		$local_url="/data/artiles/".$artileid.".htm";
 		$act_file = WEB_ROOT.$local_url;
 		
-		if(is_chapter_updated($artileid)){
+		if(is_chapter_updated($artileid)||!file_exists($act_file)){
 			pick_article($artileid,false);
 			make_article_func($artileid,false);
 		}

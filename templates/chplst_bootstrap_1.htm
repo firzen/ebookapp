@@ -87,8 +87,9 @@
 		<div class ="span12">
 			<div class="alert alert-success">
 				<h4>
-					{#$title#}：章节列表
+					{#$title#}：章节列表	
 				</h4> 
+				<div class="pull-right" id="qqwb_share__" data-appkey="801408577" data-icon="1" data-counter="1" data-counter_pos="top" data-content="我在读 《{#$title#}》 最新章节" data-richcontent="开心猪小说分享" ></div>
 			</div>
 			<div class="article_texttable">
 				<div class ="article_listtext">
@@ -137,7 +138,7 @@
 <script src="/assets/js/bootstrap-typeahead.js"></script>
 <script src="/assets/js/myapp.js"></script>
 <script src="/assets/js/jquery.tablesorter.js"></script>
-
+<script src="http://mat1.gtimg.com/app/openjs/openjs.js#autoboot=no&debug=no"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 	  $("ul li")[{#$activeIdx#}].className="active";
