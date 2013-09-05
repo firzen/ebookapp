@@ -7,6 +7,8 @@
 	include_once  WEB_ROOT."util/config.php";
 	
    class mysql{
+   
+		public $link;
 
      function __construct(){
 		//$db =  new mysql();
@@ -70,8 +72,18 @@
 		return mysql_get_server_info();
 	}
 
+	/**
+	默认使用最后被 mysql_connect() 打开的连接。如果没有找到该连接，函数会尝试调用 mysql_connect() 建立连接并使用它。如果发生意外，没有找到连接或无法建立连接，系统发出 E_WARNING 级别的警告信息。
+	**/
 	function close() {
 		return mysql_close();
+	}
+	
+	
+	function __destruct() {
+		if($this->link){
+			mysql_close ( $this->link );
+		}
 	}
 
 
