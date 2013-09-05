@@ -4,7 +4,7 @@
 	include_once  WEB_ROOT."util/mysql_class.php";
 
 	if(@$_POST["search_text"]){
-		$title = $_POST["search_text"];
+		$title = trim($_POST["search_text"]);
 		$db =  new mysql();
 		$sql_select="select a.*,c.category_name  from t_article a,t_seeds b,t_category c  where a.title like '%".$title."%' and a.seed_id = b.id and b.category_id=c.id";
 		$query = $db->query($sql_select);
