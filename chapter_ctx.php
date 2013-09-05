@@ -7,7 +7,7 @@
 	include_once WEB_ROOT."admin/funcs/make_single_chapter_func.php";
 	include_once WEB_ROOT."util/util.php";
 	
-	$db =  new mysql();
+	//$db =  new mysql();
 	if(@$_GET["id"]){
 		$chapter_id = $_GET["id"];
 		//data/chapters/1.htm

@@ -8,7 +8,7 @@
 	include_once WEB_ROOT."admin/funcs/app_util_func.php";
 	include_once WEB_ROOT."util/util.php";
 	
-	$db =  new mysql();
+	//$db =  new mysql();
 	if(@$_GET["id"]){
 		$artileid = $_GET["id"];
 		$local_url="/data/artiles/".$artileid.".htm";
