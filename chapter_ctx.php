@@ -10,7 +10,13 @@
 	//$db =  new mysql();
 	if(@$_GET["id"]){
 		$chapter_id = $_GET["id"];
-		//data/chapters/1.htm
+		navToChapter($chapter_id);
+		
+	}else{
+		echo "artileid missing";
+	}
+	
+	function navToChapter($chapter_id){
 		$local_url="/data/chapters/".$chapter_id.".htm";
 		$act_file = WEB_ROOT.$local_url;
 		if(!file_exists($act_file)){
@@ -26,9 +32,5 @@
 		}else{
 			showErrorPage($chapter_id);
 		}
-		
-	}else{
-		echo "artileid missing";
 	}
-	
 ?>
