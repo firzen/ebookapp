@@ -54,6 +54,10 @@
 	}
 	
 	function navToChapter($chapter_id){
+		if($chapter_id<0){
+			echo "<head><meta charset=\"gb2312\"></head>已到最后页	";
+			return;
+		}
 		$local_url="/data/chapters/".$chapter_id.".htm";
 		$act_file = WEB_ROOT.$local_url;
 		if(!file_exists($act_file)){
