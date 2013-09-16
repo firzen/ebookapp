@@ -68,6 +68,6 @@
 			  
 			mysql_query("SET NAMES 'gb2312'");
 
-			populate_db( mysql_select_db($GLOBALS ['database'] ['dbname']),'','install.sql' );
+			populate_db( mysql_select_db($GLOBALS ['database'] ['dbname']),'','update.sql' );
 
 ?>

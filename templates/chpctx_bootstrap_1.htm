@@ -36,7 +36,7 @@
 </head>
 
 <body>
-<div class="navbar">
+<div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="navbar-inner">
 					<div class="container-fluid">
 						 <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">开心猪</a>
@@ -101,10 +101,10 @@
 						<a href="/chapter/lst_{#$artileid#}.html">目录页</a>
 					</li>
 					<li>
-						<a href="/chapter_ctx_next.php?chapter_id={#$id#}&article_id={#$artileid#}&flag=last">上一页</a>
+						<a href="/nav/{#$artileid#}/{#$id#}/last.html">上一页</a>
 					</li>
 					<li>
-						<a href="/chapter_ctx_next.php?chapter_id={#$id#}&article_id={#$artileid#}&flag=next">下一页</a>
+						<a href="/nav/{#$artileid#}/{#$id#}/next.html" >下一页</a>
 					</li>
 				</ul>
 			</div>

@@ -7,6 +7,7 @@
 	include_once "../init.php";
 	include_once "../util/mysql_class.php";
 	include_once "../util/util.php";
+	include_once "../third_part/simple_html_dom.php";
 	
 	function pickURL($seed_id,$seed_url){
 		$db =  new mysql();	
@@ -18,7 +19,8 @@
 		foreach($chplst as $id=>$chp){
 			$articl_url=$chp["url"];
 			if(!is_artile_exsit($articl_url)){
-				$insert_sql="INSERT INTO t_article(seed_id,title,url)VALUES (".$seed_id.",'".$chp["title"]."','".$articl_url."')";
+				$insert_sql="INSERT INTO t_article(seed_id,title,url,img,author)VALUES (".$seed_id.",'".$chp["title"]."','".$articl_url."'
+				,'".$chp["img"]."','".$chp["author"]."')";
 				$db->query($insert_sql);
 			}
 		}
@@ -30,23 +32,34 @@
 	}
 	
 	function pick_artile_by_seed($seed_url){
-		$domain="http://www.81zw.com";
+		$base_domain="http://www.81zw.com";
 		$contents = myfile_get_content($seed_url);
-		//$preg1="#<ul id=\"chapterlist\">(.*)</ul>#iUs";
-		//preg_match($preg1,$contents,$cplst);
-		//echo "aa:".$cplst[1];
-		$preg="#<h1><a href=\"(.*)\" target=\"_blank\">(.*)</a></h1>#iUs";
+		$preg ="#<div class=\"book_news_style\">(.*)<div class=\"clear\"></div>(.*)</div>#iUs";
 		preg_match_all($preg,$contents,$arr);
 		
-		foreach($arr[1] as $id=>$e_url){
-			$acturl = $domain.$e_url;
-			$cptitle = $arr[2][$id];
-			$ret[$id]["url"]=$acturl;
-			$ret[$id]["title"]=$cptitle;
+		$body = $arr[0][0];
+		
+		$html = str_get_html($body);
+		// Find all article blocks
+		foreach($html->find('div.book_news_style_form') as $article) {
+		    $item['img']     = $base_domain.$article->find('img', 0)->src;
+		    $info = $article->find('div.book_news_style_text', 0);
+		    $item['title'] = $info->find('h1 a', 0)->innertext;
+		    $item['url'] = $base_domain.$info->find('h1 a', 0)->href;
+		    $tmp = $info->find('h2', 0)->innertext;
+		    $item['author'] = getAuthor($tmp);
+		    $articles[] = $item;
 		}
-		return $ret;
+		
+		//print_r($articles);
+		return $articles;
 	}
 	
+	function getAuthor($info){
+		$preg ="#作者：(.*) 【#iUs";
+		preg_match($preg,$info,$arr);
+		return $arr[1];
+	}
 	
 	/**
 		判断文章是否采集过
