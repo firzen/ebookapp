@@ -120,4 +120,10 @@ function updateClickTimes(articleid){
     htmlobj=$.ajax({url:page,async:false,data:{articleid:articleid}});
 }
 
+function load_adsence(){
+    page = "/admin/adsence.php";
+    htmlobj=$.ajax({url:page,async:false,data:{source:"web-site"}});
+    document.getElementById("adsence").innerHTML=htmlobj.responseText;
+}
+
 //show_Reguser

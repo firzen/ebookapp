@@ -38,6 +38,13 @@ title ok
 加入文章图片	ok
 页面显示最新章节
 加入种子采集路由机制，根据不同的配置采用不同的采集规则
+动态广告支持(广告的CURD，根据cookies判断广告是否投放过了，减少网络流量)
+自动生成对某表的增删改查和分页的操作
 <br>
+
+自动填充文章简介：
+http://www.kaixinpig.net/admin/article_intro.php<br>
+自动发表微博：
+http://www.kaixinpig.net/weibo/weibo_auto.php<br>
 
 
