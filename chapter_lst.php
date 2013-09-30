@@ -10,7 +10,7 @@
 	
 	//$db =  new mysql();
 	if(@$_GET["id"]){
-		$artileid = $_GET["id"];
+		$artileid = str_check($_GET["id"]);
 		$local_url="/data/artiles/".$artileid.".htm";
 		$act_file = WEB_ROOT.$local_url;
 		

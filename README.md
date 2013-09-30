@@ -46,5 +46,6 @@ title ok
 http://www.kaixinpig.net/admin/article_intro.php<br>
 自动发表微博：
 http://www.kaixinpig.net/weibo/weibo_auto.php<br>
+http://www.kaixinpig.net/qqwb/qqwb_auto.php<br>
 
 

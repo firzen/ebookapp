@@ -9,8 +9,8 @@
 	
 	//$db =  new mysql();
 	if(@$_GET["chapter_id"]){
-		$chapter_id = $_GET["chapter_id"];
-		$article_id = $_GET["article_id"];
+		$chapter_id = str_check($_GET["chapter_id"]);
+		$article_id = str_check($_GET["article_id"]);
 		$flag = $_GET["flag"];
 		if(strcmp($flag,"next")==0){
 			//echo "1";

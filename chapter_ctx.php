@@ -9,7 +9,8 @@
 	
 	//$db =  new mysql();
 	if(@$_GET["id"]){
-		$chapter_id = $_GET["id"];
+	//$id = str_check($_GET["id"]);
+		$chapter_id = str_check($_GET["id"]);
 		navToChapter($chapter_id);
 		
 	}else{

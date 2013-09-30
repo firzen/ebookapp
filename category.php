@@ -3,12 +3,13 @@
 	include_once "util/mysql_class.php";
 	include_once "smarty_inc.php";
 	include_once WEB_ROOT."admin/funcs/app_util_func.php";
+	include_once WEB_ROOT."util/util.php";
 	
 	$db =  new mysql();
 	if(@$_GET["id"]){
-		$category_id = $_GET["id"];
+		$category_id = verify_id($_GET["id"]);
 		$category_sql = " and c.id=".$category_id;
-		$pageNo=$_GET["page"];
+		$pageNo=verify_id($_GET["page"]);
 	}else{
 		$category_sql ="";
 		$pageNo=1;

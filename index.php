@@ -2,11 +2,13 @@
 	include_once "init.php";
 	include_once "smarty_inc.php";
 	include_once  WEB_ROOT."util/mysql_class.php";
+	include_once  WEB_ROOT."util/util.php";
 	
 	function getTopNovel(){
 		$db =  new mysql();
 		if(@$_GET["id"]){
-			$category_id = " and c.id=".$_GET["id"];
+			$id = verify_id($_GET["id"]);
+			$category_id = " and c.id=".$id;
 		}else{
 			$category_id ="";
 		}
