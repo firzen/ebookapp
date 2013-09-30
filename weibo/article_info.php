@@ -52,8 +52,8 @@
 			
 			$comment_strip = strip_tags(un_convert($comment));
 			$len = strlen($comment_strip);
-			if($len > 140 ){
-				$comment_strip = substr($comment_strip,0,120);
+			if($len > 280 ){
+				$comment_strip = substr($comment_strip,0,250);
 			}
 			//http://www.kaixinpig.net/chapter/lst_10.html
 			$arr["url"] = "http://www.kaixinpig.net/chapter/lst_".$random_id.".html";

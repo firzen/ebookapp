@@ -37,6 +37,9 @@
 			return;
 		}
 		$chpctx = $arr[1][0];
+		if(strlen($chpctx)<10){
+			return;
+		}
 		
 		$article_info = get_article_info($artileid);
 		//$article = get_article_title($artileid);
