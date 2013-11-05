@@ -10,13 +10,13 @@
    
 		public $link;
 
-     function __construct(){
+     function __construct($ut = "gb2312"){
 		//$db =  new mysql();
      	//$this->connect('localhost','u114841','q9LhiBaD','u114841a',"gb2312");
 		$user = $GLOBALS ['database'] ['db_user'];
 		$passwd = $GLOBALS ['database'] ['passwd'];
 		$dbname = $GLOBALS ['database'] ['dbname'];
-		$this->connect($GLOBALS ['database'] ['hostname'],$user,$passwd,$dbname,"gb2312");
+		$this->connect($GLOBALS ['database'] ['hostname'],$user,$passwd,$dbname,$ut);
      }
 
 

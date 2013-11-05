@@ -126,4 +126,28 @@ function load_adsence(){
     document.getElementById("adsence").innerHTML=htmlobj.responseText;
 }
 
+function hufen(userId,screen_name,objbutton){
+	//alert(screen_name);
+	page = "/weibo/hufen.php";
+    htmlobj=$.ajax({url:page,async:false,data:{targetId:userId}});
+	$retCode = htmlobj.responseText;
+	//alert($retCode);
+	if($retCode!=1){
+		if($retCode==0){
+			alert("您还没登陆，请先登陆！");
+		}
+		if($retCode==21327){
+			alert("对方的会话过期，请互粉下一个用户");
+		}else{
+			alert("错误码："+$retCode);
+		}
+		
+	}else{
+		objbutton.innerHTML="已互粉";
+		objbutton.disabled=true;
+	}
+	
+	//alert(objbutton.text);
+}
+
 //show_Reguser

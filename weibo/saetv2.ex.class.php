@@ -1922,6 +1922,14 @@ class SaeTClientV2
 	}
 	
 	/**
+	*退出登录，由李晓明编写*
+	**/
+	function logout()
+	{
+		return $this->oauth->get( 'account/end_session');
+	}
+	
+	/**
 	 * 取消关注某用户
 	 *
 	 * 取消关注某用户。成功则返回被取消关注人的资料，失败则返回一条字符串的说明。

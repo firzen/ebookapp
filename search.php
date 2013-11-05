@@ -6,7 +6,7 @@
 
 	if(@$_POST["search_text"]){
 		$title = trim($_POST["search_text"]);
-		$title = str_check($title);
+		//$title = str_check($title);
 		//mysql_real_escape_string($value)
 		//echo $title;
 		$db =  new mysql();

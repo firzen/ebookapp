@@ -4,7 +4,7 @@ include_once "article_info.php";
 include_once( 'config.php' );
 include_once( 'saetv2.ex.class.php' );
 
-$a1 = "2.00yWezJEFtRUFC5d0b49fda36ikUsD";
+$a1 = "2.00yWezJEFtRUFC0166bea2ccmWL1HD";
 $a2 = "2.00jf4xwCFtRUFC0d3cfee53ceJrKGB";
 
 $idx = mt_rand(1,2);

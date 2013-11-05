@@ -1,35 +1,161 @@
 <?php
-session_start();
 
+include_once "weibo_user.php";
 include_once( 'config.php' );
 include_once( 'saetv2.ex.class.php' );
 
-$o = new SaeTOAuthV2( WB_AKEY , WB_SKEY );
+session_start(); 
 
-$code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
+//<a href=" $code_url >">新浪微博登陆</a>
+$msg = "";
+
+if(!isset($_SESSION["user"])){
+	$o = new SaeTOAuthV2( WB_AKEY , WB_SKEY );
+	$code_url = $o->getAuthorizeURL( "http://kaixinpig.net/weibo/weibo_auth.php" );
+	$msg = $msg."<a href=\"".$code_url."\">新浪微博登陆</a>";
+}else{
+	$weibo_user = $_SESSION["user"] ;
+	$msg = "<a>登陆成功，用户名：".$weibo_user['screen_name']."</a>";
+}
+
+$userLst = getUidLst();
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb=“http://open.weibo.com/wb”>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>新浪微博PHP SDK V2版 Demo - Powered by Sina App Engine</title>
+	<meta name="keywords" content="互粉，新浪微博互粉，互粉应用平台，互粉营销" />
+    <meta name="description" content="互粉，新浪微博互粉，互粉应用平台，互粉营销" />
+	<title>
+	互粉|新浪微博互粉|互粉应用平台|互粉营销
+	</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf8" />
+	<meta name="robots" content="all" />
+	<meta name="googlebot" content="all" />
+	<meta name="baiduspider" content="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="zVC8MxTff8" />
+	<meta name="google-site-verification" content="ukkwYPRiU3m6NxMNlMRIReIHpzfe1dKfc_2Rp5nvRLM" />
+	
+    <!-- Le styles -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/blue/style.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/assets/css/myapp.css" rel="stylesheet">
+    <!-- <link href="/assets/css/docs.css" rel="stylesheet"> -->
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/assets/ico/favicon.png">
 </head>
 
 <body>
-	<p>新浪微博PHP SDK由新浪SAE团队开发和维护，已集成在新浪SAE平台，SAE团队会负责对其进行维护和更新，平台开发者无需自行下载更新即可直接调用最新SDK，使用微博最新API。</p>
-	<p>本DEMO演示了PHP SDK的授权及接口调用方法，开发者可以在此基础上进行灵活多样的应用开发。</p>
-	<hr />
-	<p>什么是新浪SAE？</p>
-	<p>新浪SAE，全称Sina App Engine( <a href="http://sae.sina.com.cn" target="_blank">http://sae.sina.com.cn</a> )，是新浪研发中心推出的国内首个公有云计算平台。</p>
-	<p>SAE选择在国内流行最广的Web开发语言PHP作为首选的支持语言，并即将提供JAVA、Python语言支持。</p>
-	<p>应用开发者可以通过SVN、SDK或者在线代码编辑器进行开发、部署、调试，并可以通过应用成员管理、SVN代码管理方便地进行团队协作开发。</p>
-	<p>SAE为开发者提供MySQL、Storage、Memcache、KVDB、XHProf、定时任务、异步任务队列、计数器服务、分词服务、全文检索服务等众多服务，用户无需关心运维和一些高难度技术即可快速开发，极大提高开发效率。</p>
-	<p>SAE采用“所付即所用，所付仅所用”的计费理念，通过日志和统计中心精确的计算每个应用的资源消耗，进行精确计费。并且SAE会对通过实名认证的开发者赠送免费额度，使开发者可以零成本创业。</p>
-	<p>总而言之，SAE就是简单高效的分布式web服务开发、运行平台。</p>
-	<p>更多SAE相关内容，请点击 <a href="http://sae.sina.com.cn/?m=devcenter" target="_blank">http://sae.sina.com.cn/?m=devcenter</a> 。</p>
-	<!-- 授权按钮 -->
-    <p><a href="<?=$code_url?>"><img src="weibo_login.png" title="点击进入授权页面" alt="点击进入授权页面" border="0" /></a></p>
 
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+						 <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">开心猪互粉</a>
+						<div class="nav-collapse collapse navbar-responsive-collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="index.php">互粉大厅</a>
+								</li>
+								<li>
+									<a href="help.html">帮助</a>
+								</li>
+								
+							</ul>
+							<ul class="nav pull-right">
+								<li>
+									<?php echo $msg ?>
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			<ul class="breadcrumb">
+				<li>
+					互粉大厅
+				</li>
+				
+			</ul>
+			<div class="row-fluid">
+				<?php foreach( $userLst as $user ){
+					if(isset($_SESSION["user"])&&$user["uid"]==$_SESSION["user"]["uid"]){
+						continue;
+					}
+				?>
+				<div class="span2">
+					<div class="media">
+						 <a href="#" class="pull-left"><img src="<?php echo $user["profile_image_url"];?>" class="media-object" alt='' /></a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								<?php echo $user["screen_name"];?>
+							</h4> 
+							<button class="btn btn-info" type="button" onClick="hufen('<?php echo $user["uid"];?>','<?php echo $user["screen_name"];?>',this)">互粉一下</button>
+						</div>
+					</div>
+				</div>
+				<?php }?>
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer">
+	<div class="container">
+	<p> 您对本互粉平台有什么意见，请给我们发<a target="_blank" href="mailto:admin@kaixinpig.net">邮件</a> </p>
+	<p> Copyright &copy;2013 开心猪 All Rights Reserved.
+		<script type="text/javascript">
+		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F3bddc2464e88ba72ff504c6fda7bb984' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</p>
+	<ul class="footer-links">
+		<li><a target="_blank" href="http://www.kaixinpig.net">开心猪小说网</a></li>
+		<li class="muted">.</li>
+		<li><a target="_blank" href="mailto:admin@kaixinpig.net">问题反馈</a></li>
+		<li class="muted">.</li>
+		<li><a target="_blank" href="http://www.bootcss.com/">开源框架</a></li>
+	</ul>	
+	</div>
+</footer>
+
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/bootstrap-transition.js"></script>
+<script src="/assets/js/bootstrap-alert.js"></script>
+<script src="/assets/js/bootstrap-modal.js"></script>
+<script src="/assets/js/bootstrap-dropdown.js"></script>
+<script src="/assets/js/bootstrap-scrollspy.js"></script>
+<script src="/assets/js/bootstrap-tab.js"></script>
+<script src="/assets/js/bootstrap-tooltip.js"></script>
+<script src="/assets/js/bootstrap-popover.js"></script>
+<script src="/assets/js/bootstrap-button.js"></script>
+<script src="/assets/js/bootstrap-collapse.js"></script>
+<script src="/assets/js/bootstrap-carousel.js"></script>
+<script src="/assets/js/bootstrap-typeahead.js"></script>
+<script src="/assets/js/myapp.js"></script>
+
+<script type="text/javascript">
+	//load_adsence();
+</script>
 </body>
-</html>
