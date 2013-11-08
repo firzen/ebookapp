@@ -1,26 +1,39 @@
 <?php
 
 include_once "article_info.php";
+include_once "weibo_user.php";
+include_once "../util/util.php";
 include_once( 'config.php' );
 include_once( 'saetv2.ex.class.php' );
 
-$a1 = "2.00yWezJEFtRUFC0166bea2ccmWL1HD";
-$a2 = "2.00jf4xwCFtRUFC0d3cfee53ceJrKGB";
+$weiboIDs=array("2703445503","3812212164");
 
-$idx = mt_rand(1,2);
-$a = $a1;
-if($idx==2){
-	$a = $a2;
-}
+$totalLen = count($weiboIDs);
+$idx = mt_rand(1,$totalLen);
 
-$c = new SaeTClientV2( WB_AKEY , WB_SKEY , $a );
+$choiceID = $weiboIDs[$idx-1];
+$choiceToken = getAccessToken($choiceID);
+
+$c = new SaeTClientV2( WB_AKEY , WB_SKEY , $choiceToken );
 
 $arr = getRandomInfo();
 $status = $arr["comment"];
+$status = substr($status,0,200);
 $status = mb_convert_encoding( $status, "utf8","gb2312");  
 $title = mb_convert_encoding( $arr["title"], "utf8","gb2312"); 
 $status ="".$status."".$arr["url"];
 $pic_path = $arr["img"];
-$ms  = $c->upload($status,$pic_path); // done
-echo $idx." ok";
+$pic_content = myfile_get_content($pic_path);
+$local_path = "tmp.jpg";
+makehtml($local_path,$pic_content);
+
+try{
+	//http://weibo.com/u/2703445503
+	echo "<a href='http://weibo.com/u/".$choiceID."'>微博地址</a> <br>";
+	$ms  = $c->upload($status,$local_path); // done
+	print_r($ms);
+	//echo "ret:".print_r($ms)." <br>";
+}catch (Exception $e){
+	print $e->getMessage();  
+}
 ?>
