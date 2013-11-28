@@ -20,18 +20,23 @@
 			$db->query($update_sql);
 			$arr[] = $row;
 		}
-	
+		
+		$links = getLinks();
+		$advert = getadvert();
+		$smarty->assign("links",$links);
+		$smarty->assign("advert",$advert);
 		$smarty->assign("title",$artile);
 		$smarty->assign("chapter",$arr);
 		$smarty->assign("activeIdx",$category_id);
 		//$smarty->display("chplst.htm");
 		$content = $smarty->fetch('chplst_bootstrap_1.htm');
+		$content2 = $smarty->fetch('common_footer.htm');
 		$local_url="data/artiles/".$artileid.".htm";
 		
 		$update_sql="update t_article set local_url='".$local_url."' where id=".$artileid;
 		$db->query($update_sql);
 		
-		makehtml(WEB_ROOT.$local_url,$content);
+		makehtml(WEB_ROOT.$local_url,$content.$content2);
 		
 		if($debug){
 			echo "<a href='".$GLOBALS ['web'] ['base'].$local_url."'>生成文章目录页成功</a>";

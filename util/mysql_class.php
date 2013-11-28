@@ -21,7 +21,7 @@
 
 
      function connect($host,$name,$pass,$table,$ut){
-      $link=mysql_connect($host,$name,$pass) or die ($this->error());
+      $link=mysql_pconnect($host,$name,$pass) or die ($this->error());
       mysql_select_db($table,$link) or die("没该数据库：".$table);
       mysql_query("SET NAMES '$ut'");
      }

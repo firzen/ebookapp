@@ -9,14 +9,14 @@
 <body>
 <?php
 include_once "../init.php";
-include_once "../util/mysql_class.php";
+include_once "../util/Model_class.php";
 
 	if(@$_POST["categoryName"]){
 		$categoryName = $_POST["categoryName"];
-		$db =  new mysql();
-		$insert_sql ="INSERT INTO t_category (category_name)VALUES ('".$categoryName."')";
-		$db->query($insert_sql);
+		$model = new Model();
+		$model->insert("t_category", array("category_name"), array($categoryName));
 		echo "²åÈë³É¹¦";
+		
 	}else{
 ?>
 <form name="form1" method="post" action="add-category.php">

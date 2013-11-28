@@ -5,89 +5,68 @@
  
  <?php
 	include_once "../init.php";
-	include_once "../util/mysql_class.php";
+	include_once "../util/Model_class.php";
 	include_once "../util/util.php";
 	include_once "../third_part/simple_html_dom.php";
+	include_once "Parser_class.php";
 	
-	function pickURL($seed_id,$seed_url){
-		$db =  new mysql();	
-		//读远程url
-		$chplst = pick_artile_by_seed($seed_url);
-		//写数据库
-		//print_r($chplst);
+	function pickURL($seed){
+		//print_r($seed);
+		$seed_url=$seed["url"];
+		$seed_id=$seed["id"];
 		
+		$chplst = route($seed);
+		$model = new Model();
 		foreach($chplst as $id=>$chp){
 			$articl_url=$chp["url"];
 			if(!is_artile_exsit($articl_url)){
-				$insert_sql="INSERT INTO t_article(seed_id,title,url,img,author)VALUES (".$seed_id.",'".$chp["title"]."','".$articl_url."'
-				,'".$chp["img"]."','".$chp["author"]."')";
-				$db->query($insert_sql);
+				$title = $chp["title"];
+				$img = $chp["img"];
+				$author = $chp["author"];
+				$model->insert("t_article", array("seed_id","title","url","img","author"),
+								array($seed_id,$title,$articl_url,$img,$author));
 			}
 		}
 		
-		$update_sql="update t_seeds set modify_date='".date('Ymd')."' where id=".$seed_id;
-		$db->query($update_sql);
+		$condition = "id=".$seed_id;
+		$model->update("t_seeds", array("modify_date"=>date('Ymd')), $condition);
 		
 		echo "采集完成";
 	}
 	
-	function pick_artile_by_seed($seed_url){
-		$base_domain="http://www.81zw.com";
-		$contents = myfile_get_content($seed_url);
-		$preg ="#<div class=\"book_news_style\">(.*)<div class=\"clear\"></div>(.*)</div>#iUs";
-		preg_match_all($preg,$contents,$arr);
-		
-		$body = $arr[0][0];
-		
-		$html = str_get_html($body);
-		// Find all article blocks
-		foreach($html->find('div.book_news_style_form') as $article) {
-		    $item['img']     = $base_domain.$article->find('img', 0)->src;
-		    $info = $article->find('div.book_news_style_text', 0);
-		    $item['title'] = $info->find('h1 a', 0)->innertext;
-		    $item['url'] = $base_domain.$info->find('h1 a', 0)->href;
-		    $tmp = $info->find('h2', 0)->innertext;
-		    $item['author'] = getAuthor($tmp);
-		    $articles[] = $item;
-		}
-		
-		//print_r($articles);
-		return $articles;
+	
+	function route($seed){
+		$parse_class = $seed["parse_class"];
+		$seed_url=$seed["url"];
+		$parserBean = new $parse_class();
+		return $parserBean->parse_level1($seed_url);
 	}
 	
-	function getAuthor($info){
-		$preg ="#作者：(.*) 【#iUs";
-		preg_match($preg,$info,$arr);
-		return $arr[1];
-	}
 	
 	/**
 		判断文章是否采集过
 	**/
 	function is_artile_exsit($url){
-		$db =  new mysql();
-		$sql_select="select id from t_article where url='".$url."'";
-		$query = $db->query($sql_select);
-		if($db->num_rows($query)>0){
-			return true;
-		}
-		return false;
+		$model = new Model();
+		$condition = "url='".$url."'";
+		$rows = $model->select("t_article","id",$condition); 
+		return $rows;
 	}
+	
+	/*程序入口*/
 	
 	if(@$_GET["seedid"]){
 		$seedid=$_GET["seedid"];
-		$sql_select="select id,url from t_seeds where id=".$seedid;
+		$condition = "id=".$seedid;
 	}else{
-		$sql_select="select id,url from t_seeds where modify_date<'".date('Ymd')."' limit 0,1";
+		$condition = "modify_date<'".date('Ymd')."' limit 0,1";
 	}
 	
-	$db =  new mysql();
-	$query = $db->query($sql_select);
-	if($db->num_rows($query)>0){
-		$seed = $db->fetch_row_array($query);
-		$seed_url=$seed["url"];
-		$seed_id=$seed["id"];
-		pickURL($seed_id,$seed_url);
+	$model = new Model();
+	$rows = $model->select("t_seeds","*",$condition);
+	if($rows){
+		$seed = $rows[0];
+		pickURL($seed);
 	}
 	
 ?>

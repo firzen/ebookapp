@@ -30,27 +30,28 @@
 	
 	function makechaptercontent($id,$url,$localurl,$title,$artileid){
 		global $smarty;
-		$contents = myfile_get_content($url);
-		$preg="#<!--go-->(.*)<!--over-->#iUs";
-		preg_match_all($preg,$contents,$arr);
-		if(strlen($contents)<1){
-			return;
-		}
-		$chpctx = $arr[1][0];
+		$article_info = get_article_info($artileid);
+		$parse_class = $article_info["parse_class"];
+		$parserBean = new $parse_class();
+		$chpctx = $parserBean->parse_level3($url);
+		
 		if(strlen($chpctx)<10){
 			return;
 		}
 		
-		$article_info = get_article_info($artileid);
-		//$article = get_article_title($artileid);
+		$links = getLinks();
+		$advert = getadvert();
+		$smarty->assign("links",$links);
+		$smarty->assign("advert",$advert);
 		$smarty->assign("id",$id);
 		$smarty->assign("artileid",$artileid);
 		$smarty->assign("article",$article_info["title"]);
 		$smarty->assign("activeIdx",$article_info["category_id"]);
 		$smarty->assign("title",$title);
 		$smarty->assign("chpctx",$chpctx);
-		$novel = $smarty->fetch('chpctx_bootstrap_1.htm');
-		makehtml(WEB_ROOT.$localurl,$novel);
+		$novel_body = $smarty->fetch('chpctx_bootstrap_1.htm');
+		$novel_footer = $smarty->fetch("common_footer.htm");
+		makehtml(WEB_ROOT.$localurl,$novel_body.$novel_footer);
 	}
 	
 	function showErrorPage($id){

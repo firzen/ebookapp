@@ -7,6 +7,9 @@
 	include_once WEB_ROOT."admin/funcs/pick_artile_func.php";
 	include_once WEB_ROOT."admin/funcs/app_util_func.php";
 	include_once WEB_ROOT."util/util.php";
+	include_once WEB_ROOT."util/Model_class.php";
+	include_once WEB_ROOT.'admin/Parser_class.php';
+	include_once 'third_part/simple_html_dom.php';
 	
 	//$db =  new mysql();
 	if(@$_GET["id"]){

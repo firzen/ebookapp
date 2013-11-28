@@ -3,16 +3,14 @@
 </head>	
 <?php
 	include_once "../init.php";
-	include_once "../util/mysql_class.php";
+	include_once "../util/Model_class.php";
 	include_once "../smarty_inc.php";
 	include_once "../util/util.php";
 	
 	function del_article_func($artileid){
-		$db =  new mysql();
-		$update_sql="delete from t_article where id = ".$artileid;
-		$db->query($update_sql);
-		$update_sql="delete from t_chapter where artile_id = ".$artileid;
-		$db->query($update_sql);
+		$model = new Model();
+		$model->delete("t_article", "id=".$artileid);
+		$model->delete("t_chapter", "artile_id=".$artileid);
 	}
 	
 	$artileid=$_GET["artileid"];
