@@ -10,12 +10,14 @@
 	include_once WEB_ROOT.'admin/Parser_class.php';
 	include_once 'third_part/simple_html_dom.php';
 	
-	//$db =  new mysql();
 	if(@$_GET["id"]){
-	//$id = str_check($_GET["id"]);
 		$chapter_id = str_check($_GET["id"]);
-		navToChapter($chapter_id);
-		
+		try{
+			navToChapter($chapter_id);
+		}catch (Exception $e){
+			echo $e->getMessage(), '<br/>';
+			echo '<pre>', $e->getTraceAsString(), '</pre>';
+		}
 	}else{
 		echo "artileid missing";
 	}
@@ -27,7 +29,8 @@
 			try{
 				make_chapter_func($chapter_id,false);
 			}catch(Exception $e){
-				
+				echo $e->getMessage(), '<br/>';
+				echo '<pre>', $e->getTraceAsString(), '</pre>';
 			}
 		}
 		

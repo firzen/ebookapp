@@ -3,6 +3,8 @@
 	include_once "smarty_inc.php";
 	include_once  WEB_ROOT."util/mysql_class.php";
 	include_once  WEB_ROOT."util/util.php";
+	include_once WEB_ROOT."admin/funcs/app_util_func.php";
+	include_once  WEB_ROOT."util/Model_class.php";
 
 	if(@$_POST["search_text"]){
 		$title = trim($_POST["search_text"]);
@@ -15,8 +17,14 @@
 		while($row=$db->fetch_row_array($query)){
 			$arr[] = $row;
 		}
+		$links = getLinks();
+		$advert = getadvert();
+		$smarty->assign("links",$links);
+		$smarty->assign("advert",$advert);
 		$smarty->assign("artile",$arr);
+		$smarty->display("common_header.htm");
 		$smarty->display("index_bootstrap.htm");
+		$smarty->display("common_footer.htm");
 	}else{
 		echo "请输入文章标题";
 	}

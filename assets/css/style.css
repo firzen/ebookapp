@@ -128,3 +128,51 @@ font-size:20px;
 	float:left;
 }
 
+/**
+	myapp.css
+**/
+
+
+.bs-docs-example {
+    position: relative;
+    margin: 15px 10px 15px 0px;
+    padding: 39px 19px 0px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    /**Ïò div ÔªËØÌí¼ÓÔ²½Ç±ß¿ò£º**/
+    border-radius: 4px 4px 4px 4px;
+}
+
+.gonggao {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(221, 221, 221);
+    color: rgb(157, 160, 164);
+    border-radius: 4px 0px 4px 0px;
+}
+
+
+.border-bodom {
+    border-bottom: 1px dashed rgb(221, 221, 221);
+    margin-bottom: 2px;
+    text-align:left;
+}
+
+.order-num {
+    width: 18px;
+    display: inline-block;
+    color: rgb(136, 136, 136);
+}
+.text-left{
+	text-align:left;
+}
+
+
+
+
+

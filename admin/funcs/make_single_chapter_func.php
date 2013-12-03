@@ -2,6 +2,7 @@
 	include_once WEB_ROOT."util/util.php";
 	
 	function make_chapter_func($id,$debug){
+		//echo "bb";
 		$db =  new mysql();
 		$sql_select="select * from t_chapter where  id=".$id;
 		$query = $db->query($sql_select);

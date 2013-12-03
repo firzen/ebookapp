@@ -50,12 +50,16 @@ $advert = getadvert();
 $smarty->assign("links",$links);
 $smarty->assign("advert",$advert);
 
+$recent = getRecent();
+$smarty->assign("click_artile",$arr);
+
 $smarty->assign("maxPg",$maxPg);
 $smarty->assign("total",$total);
 $smarty->assign("pagination",$pagination);
 $smarty->assign("category_name",$category_name);
 $smarty->assign("activeIdx",$category_id);
-$smarty->assign("artile",$arr);
+$smarty->assign("artile",$recent);
 $smarty->display("category_bootstrap.htm");
+$smarty->display("right-nav.htm");
 $smarty->display("common_footer.htm");
 ?>

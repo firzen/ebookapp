@@ -6,6 +6,7 @@
 	include_once "../util/Model_class.php";
 	include_once "../util/util.php";
 	include_once "funcs/pick_artile_func.php";
+	include_once "funcs/app_util_func.php";
 	include_once "Parser_class.php";
 	include_once "../third_part/simple_html_dom.php";
 	

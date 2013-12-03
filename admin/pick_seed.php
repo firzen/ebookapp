@@ -11,15 +11,28 @@
 	include_once "Parser_class.php";
 	
 	function pickURL($seed){
-		//print_r($seed);
+		print_r($seed);
 		$seed_url=$seed["url"];
 		$seed_id=$seed["id"];
 		
-		$chplst = route($seed);
+		//先假定已经采集成功了，否则如果采集出错，则种子状态不变，自动采集就会停止在此种子
 		$model = new Model();
+		$condition = "id=".$seed_id;
+		$model->update("t_seeds", array("modify_date"=>date('Ymd')), $condition);
+		
+		$chplst = array();
+		
+		try{
+			$chplst = route($seed);
+		}catch (Exception $e){
+			echo $e->getMessage(), '<br/>';
+			echo '<pre>', $e->getTraceAsString(), '</pre>';
+		}
+		
 		foreach($chplst as $id=>$chp){
 			$articl_url=$chp["url"];
-			if(!is_artile_exsit($articl_url)){
+			$title = $chp["title"];
+			if(!(is_artile_exsit($articl_url)||is_title_exsit($title))){
 				$title = $chp["title"];
 				$img = $chp["img"];
 				$author = $chp["author"];
@@ -27,9 +40,6 @@
 								array($seed_id,$title,$articl_url,$img,$author));
 			}
 		}
-		
-		$condition = "id=".$seed_id;
-		$model->update("t_seeds", array("modify_date"=>date('Ymd')), $condition);
 		
 		echo "采集完成";
 	}
@@ -49,6 +59,13 @@
 	function is_artile_exsit($url){
 		$model = new Model();
 		$condition = "url='".$url."'";
+		$rows = $model->select("t_article","id",$condition); 
+		return $rows;
+	}
+	
+	function is_title_exsit($title){
+		$model = new Model();
+		$condition = "title='".$title."'";
 		$rows = $model->select("t_article","id",$condition); 
 		return $rows;
 	}

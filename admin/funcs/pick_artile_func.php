@@ -37,6 +37,10 @@ function pick_article($artileid,$debug){
 			
 		//更新文章状态
 		$model->update("t_article", array("status"=>$status,"modify_date"=>date('Ymd'),"comment"=>$article_info["comment"]), "id=".$artileid);
+		$author = $article_info['author'] ; 
+		if(!empty($author)){
+			$model->update("t_article", array("author"=>$author), "id=".$artileid);
+		}
 			
 		if($debug){
 			echo "采集完成";

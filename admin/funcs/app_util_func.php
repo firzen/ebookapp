@@ -20,6 +20,22 @@
 		return $model->select("t_links");
 	}
 	
+	function getRecent(){
+		$model = new Model();
+		
+		if(@$_GET["id"]){
+			$id = verify_id($_GET["id"]);
+			$category_id = " and c.id=".$id;
+		}else{
+			$category_id ="";
+		}
+		$sql_select="select a.*,c.category_name from t_article a,t_seeds b,t_category c where a.seed_id = b.id and b.category_id=c.id ".$category_id." order by a.id desc limit 0,30";
+		
+		$model->query($sql_select);
+		
+		return $model->fetch_all();
+	}
+	
 	
 	function get_article_info($artileid){
 		$db =  new mysql();

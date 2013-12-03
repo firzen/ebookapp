@@ -22,7 +22,11 @@
 	}
 	
 	
+	
+	
+	
 	$arr = getTopNovel();
+	
 	
 	
 	
@@ -32,9 +36,14 @@
 	$smarty->assign("links",$links);
 	$smarty->assign("advert",$advert);
 	
+	$recent = getRecent();
+	$smarty->assign("click_artile",$arr);
+	
 	$smarty->assign("hotarticle",$arr[0]["title"]);
-	$smarty->assign("artile",$arr);
+	$smarty->assign("artile",$recent);
 	$smarty->display("common_header.htm");
+	
 	$smarty->display("index_bootstrap.htm");
+	$smarty->display("right-nav.htm");
 	$smarty->display("common_footer.htm");
 ?>
