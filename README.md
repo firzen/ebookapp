@@ -39,9 +39,12 @@ title ok
 数据库常用封装支持,封装为Model类，简化了操作。ok
 
 采集时把文章简介和图片，作者等一起采集，不再采用补齐机制 ok
+用户中心，支持微博登陆，显示最近阅读的文章，显示收藏文章
+
+
 文章采集时把文章内容写入到txt文件，不在支持生成现成的html文件，html文件动态生成。 ajax动态生成广告页面为什么不行？
 去除cpm广告，加入cps和cpc广告支持，手机则加载手机广告，由广告生成模块负责，对于cpc广告可以由javascript模拟点击
-加入种子采集路由机制，根据不同的配置采用不同的采集规则（还差三级页面）
+加入种子采集路由机制，根据不同的配置采用不同的采集规则 ok
 划分页面公共头，公共页脚页面（目前只做了一个首页，其他可暂时不做）
 
 
@@ -61,5 +64,7 @@ http://www.kaixinpig.net/admin/article_intro.php<br>
 自动发表微博：
 http://www.kaixinpig.net/weibo/weibo_auto.php<br>
 http://www.kaixinpig.net/qqwb/qqwb_auto.php<br>
+自动抓取文章列表为空的文章的列表
+http://www.kaixinpig.net/admin/pick_artile.php<br>
 
 

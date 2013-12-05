@@ -36,6 +36,34 @@
 		return $model->fetch_all();
 	}
 	
+	function getCRecent($category_sql,$pageNo,$order_by){
+		$model = new Model();
+		
+		$startIdx = ($pageNo-1)*15;
+		//$endIdx = $pageNo*15;
+		$sql_select="select a.*,c.category_name from t_article a,t_seeds b,t_category c where a.seed_id = b.id and b.category_id=c.id ".$category_sql." order by $order_by desc limit ".$startIdx.",15";
+		//echo $sql_select;
+		$model->query($sql_select);
+		
+		return $model->fetch_all();
+	}
+	
+	
+	function getPageInfo($category_id,$pageNo,$maxPg){
+		$startPage = $pageNo-5<=0?1:$pageNo-5;
+		$endPage = $maxPg-$startPage<10?$maxPg:10+$startPage;
+		
+		//$pagination = "<li><a href=\"/category/".$category_id."/".($pageNo+1).".html\">Next</a></li>";
+		$pagination="";
+		for($page=$startPage;$page<=$endPage;$page++){
+			$pagination = $pagination."<li><a href=\"/category/".$category_id."/".($page).".html\">$page</a></li>";
+		}
+		
+		return $pagination;
+		
+	}
+	
+	
 	
 	function get_article_info($artileid){
 		$db =  new mysql();

@@ -40,6 +40,10 @@
 			return;
 		}
 		
+		$category_sql = " and c.id=".$article_info["category_id"];
+		$topClicks = getCRecent($category_sql,"1","a.click_times");
+		$smarty->assign("click_artile",$topClicks);
+		
 		$links = getLinks();
 		$advert = getadvert();
 		$smarty->assign("links",$links);
@@ -51,8 +55,9 @@
 		$smarty->assign("title",$title);
 		$smarty->assign("chpctx",$chpctx);
 		$novel_body = $smarty->fetch('chpctx_bootstrap_1.htm');
+		$content_right = $smarty->fetch("right-nav.htm");
 		$novel_footer = $smarty->fetch("common_footer.htm");
-		makehtml(WEB_ROOT.$localurl,$novel_body.$novel_footer);
+		makehtml(WEB_ROOT.$localurl,$novel_body.$content_right.$novel_footer);
 	}
 	
 	function showErrorPage($id){

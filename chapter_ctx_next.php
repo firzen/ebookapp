@@ -9,6 +9,7 @@
 	include_once WEB_ROOT."util/Model_class.php";
 	include_once WEB_ROOT.'admin/Parser_class.php';
 	include_once 'third_part/simple_html_dom.php';
+	include_once 'util/mobile_redirect.php';
 	
 	//$db =  new mysql();
 	if(@$_GET["chapter_id"]){
