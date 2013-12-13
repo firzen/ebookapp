@@ -38,7 +38,12 @@ title ok
 
 数据库常用封装支持,封装为Model类，简化了操作。ok
 
-采集时把文章简介和图片，作者等一起采集，不再采用补齐机制 ok
+<li>采集时把文章简介和图片，作者等一起采集，不再采用补齐机制 ok </li>
+<li>显示用户点击榜，显示最近更新，定时生成siteMap.xml.(http://zhanzhang.baidu.com/wiki/44) ok </li>
+<li>对于小站，php的并发进程数受限，比如说kaixinpig.net，限制进程数为3，此时如果更多的用户访问，经常出现508的错误，为解决此问题，可采用全静态化的方法解决。</li>
+
+
+
 用户中心，支持微博登陆，显示最近阅读的文章，显示收藏文章
 
 
@@ -48,19 +53,13 @@ title ok
 划分页面公共头，公共页脚页面（目前只做了一个首页，其他可暂时不做）
 
 
-
-
-
-
-
-
 自动生成对某表的增删改查和分页的操作
 加入文章简介
 页面显示最新章节
 <br>
 
-自动填充文章简介：
-http://www.kaixinpig.net/admin/article_intro.php<br>
+定时生成sitemap：
+http://www.kaixinpig.net/admin/sitemap.php<br>
 自动发表微博：
 http://www.kaixinpig.net/weibo/weibo_auto.php<br>
 http://www.kaixinpig.net/qqwb/qqwb_auto.php<br>
