@@ -2,6 +2,7 @@
 
 	include_once "../init.php";
 	include_once "../util/config.php";
+	include_once "../util/util.php";
 	
 	
 			function populate_db( $DBname, $DBPrefix, $sqlfile ) {
@@ -71,10 +72,13 @@
 			populate_db( mysql_select_db($GLOBALS ['database'] ['dbname']),'','install.sql' );
 			
 			//创建文件夹templates_c,data/artiles,data/chapters
-			mkdir("../templates_c", 0777);
-			mkdir("../data", 0777);
-			mkdir("../data/artiles", 0777);
-			mkdir("../data/chapters", 0777);
+			mkdir_force("../templates_c");
+			mkdir_force("../data");
+			mkdir_force("../data/artiles");
+			mkdir_force("../data/chapters");
+			
+			
+			
 			
 			
 

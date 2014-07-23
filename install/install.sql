@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `t_adsence` (
   `text` varchar(1024) NOT NULL,
   `aviable` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `t_adsence`
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `t_links` (
   `name` varchar(255) NOT NULL,
   `url` varchar(1024) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `t_links`
