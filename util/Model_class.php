@@ -63,6 +63,7 @@ class Model{
 				throw new Exception('查询数据的表名，字段，条件不能为空', 444);
 			}
 			$this->sql = "SELECT {$fields} FROM `{$table}` WHERE {$condition}";
+			$this->ping();
 			$result = $this->query($this->sql);
 			return $this->fetch_all();
 
@@ -310,6 +311,22 @@ class Model{
 			mysql_close ( $this->link );
 		}*/
 	}
+	
+	/**
+	 * 
+	 * 解决“MySQL server has gone away”的错误
+	 */
+	function ping(){    
+ 
+    if(!mysql_ping($this->link)){    
+ 
+        mysql_close($this->link); //注意：一定要先执行数据库关闭，这是关键    
+ 
+        $this->connect();    
+ 
+    }    
+ 
+} 
 
 }
 
