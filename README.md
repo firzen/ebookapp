@@ -64,7 +64,10 @@ http://www.5ilp.cn/admin/sitemap.php<br>
 http://www.5ilp.cn/weibo/weibo_auto.php<br>
 http://www.5ilp.cn/qqwb/qqwb_auto.php<br>
 自动抓取文章列表为空的文章的列表(原理：每天自动更新文章列表，章节在点击时候抓取，内容也是在点击时候抓取)
-http://www.5ilp.cn/admin/pick_artile.php<br>
+http://www.5ilp.cn/admin/pick_seed.php<br>
+
+
+cron job:wget -q -O /dev/null "http://www.5ilp.cn/admin/pick_seed.php"
 
 演示程序采用国外免费空间，申请点击此处：<a href="http://api.hostinger.co.uk/redir/4393980" target="_blank">http://api.hostinger.co.uk/redir/4393980</a> <br>
 
