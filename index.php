@@ -44,6 +44,12 @@
 	$smarty->assign("artile",$recent);
 	$smarty->display("common_header.htm");
 	
+	$history = "";
+	if(@$_COOKIE["history"]){
+		$history = $_COOKIE["history"];
+	}
+	$smarty->assign("history",$history);
+	
 	$smarty->display("index_bootstrap.htm");
 	$smarty->display("right-nav.htm");
 	$smarty->display("common_footer.htm");

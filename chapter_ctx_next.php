@@ -63,6 +63,7 @@
 			return;
 		}
 		$local_url="/data/chapters/".$chapter_id.".htm";
+		setcookie('history',$local_url,time()+3600*24*7,"/");
 		$act_file = WEB_ROOT.$local_url;
 		if(!file_exists($act_file)){
 			try{
