@@ -1,5 +1,5 @@
 #ebookapp
-<b>概述</b>：基于bootstrap前端技术的小说采集系统，手机浏览效果更佳。演示网站:http://www.5ilp.cn<br>
+<b>概述</b>：基于bootstrap前端技术的小说采集系统，手机浏览效果更佳。演示网站:http://www.020mk.cn<br>
 
 我本人是一个小说爱好者，在读小说的过程中，碰到n多个弹出广告，而本人又喜欢手机浏览，经过被无数次的弹出广告激怒以后，决心写自己的小说系统。<br>
 因一个人开发精力有限， 非常欢迎有志于开源软件开发具有分享精神的软件开发者和我一起开发。<br>
@@ -59,16 +59,13 @@ title ok
 <br>
 
 定时生成sitemap：
-http://www.5ilp.cn/admin/sitemap.php<br>
+http://www.020mk.cn/admin/sitemap.php<br>
 自动发表微博：
-http://www.5ilp.cn/weibo/weibo_auto.php<br>
-http://www.5ilp.cn/qqwb/qqwb_auto.php<br>
+http://www.020mk.cn/weibo/weibo_auto.php<br>
+http://www.020mk.cn/qqwb/qqwb_auto.php<br>
 自动抓取文章列表为空的文章的列表(原理：每天自动更新文章列表，章节在点击时候抓取，内容也是在点击时候抓取)
-http://www.5ilp.cn/admin/pick_seed.php<br>
+http://www.020mk.cn/admin/pick_seed.php<br>
 
 
-cron job:wget -q -O /dev/null "http://www.5ilp.cn/admin/pick_seed.php"
-
-演示程序采用国外免费空间，申请点击此处：<a href="http://api.hostinger.co.uk/redir/4393980" target="_blank">http://api.hostinger.co.uk/redir/4393980</a> <br>
-
+cron job:wget -q -O /dev/null "http://www.020mk.cn/admin/pick_seed.php"
 
