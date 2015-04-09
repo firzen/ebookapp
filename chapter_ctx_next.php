@@ -16,17 +16,30 @@
 		$chapter_id = str_check($_GET["chapter_id"]);
 		$article_id = str_check($_GET["article_id"]);
 		$flag = $_GET["flag"];
+
 		if(strcmp($flag,"next")==0){
 			//echo "1";
+			update_clicktimes($article_id);
 			$next_id = next_chapter_func($chapter_id,$article_id);
 		}else{
 			//echo "2";
 			$next_id = last_chapter_func($chapter_id,$article_id);
+			update_clicktimes($article_id);
 		}
 		//echo $next_id;
 		navToChapter($next_id);
 	}else{
 		echo "artileid missing";
+	}
+
+	function update_clicktimes($article_id){
+		try{
+			$db =  new mysql();
+			$sql_select="update t_article set click_times = click_times+1 where id=".$article_id;
+			$query = $db->query($sql_select);
+		}catch (Exception $e){
+			
+		}
 	}
 	
 	function next_chapter_func($chapter_id,$article_id){
