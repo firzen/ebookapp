@@ -4,7 +4,7 @@ class N81ZW_Parser{
 	
 /**
 	 * 
-	 * Enter description here ...Èç¹û²»°üº¬httpÍ·ÔòËµÃ÷Ïà¶ÔÂ·¾¶£¬ÐèÒªÐÞ¸ÄÎª¾ø¶ÔÂ·¾¶
+	 * Enter description here ...ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½httpÍ·ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Þ¸ï¿½Îªï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 	 * @param unknown_type $base_domain
 	 * @param unknown_type $info
 	 */
@@ -42,7 +42,7 @@ class N81ZW_Parser{
 	
 	function getAuthor($info){
 		//print_r($info);
-		//$preg ="#×÷Õß£º(.*) ¡¾#iUs";
+		//$preg ="#ï¿½ï¿½ï¿½ß£ï¿½(.*) ï¿½ï¿½#iUs";
 		//preg_match($preg,$info,$arr);
 		return substr($info, 6);
 		//print_r($arr);
@@ -69,7 +69,7 @@ class N81ZW_Parser{
 			$chplst[] = $item;
 		}
 		
-		if(strpos($status,"ÖÐ")>0){
+		if(strpos($status,"ï¿½ï¿½")>0){
 			$status = 0;
 		}else{
 			$status = 1;
@@ -85,18 +85,26 @@ class N81ZW_Parser{
 	}
 	
 	function parse_level3($chapter_url){
+		if (!function_exists('writeLog')) {
+			include_once  WEB_ROOT."util/util.php";
+		}
 		$contents = myfile_get_content($chapter_url);
+		//writeLog("parse_level3 entry!contents,".$contents);
 		$preg="#<!--go-->(.*)<!--over-->#iUs";
 		preg_match_all($preg,$contents,$arr);
 		if(strlen($contents)<1){
 			return;
+		}else{
+			$chpctx = $arr[1][0];
 		}
-		$chpctx = $arr[1][0];
+
+		if(strlen($chpctx)<1){
+			$preg="#<div id=\"content\">(.*)</div>#iUs";
+			preg_match_all($preg,$contents,$arr);
+			$chpctx = $arr[1][0];
+		}
+		//writeLog($chpctx);
 		return $chpctx;
 	}
-	
-	
-	
-
 }
 ?>
