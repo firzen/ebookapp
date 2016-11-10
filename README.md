@@ -1,5 +1,5 @@
 #ebookapp
-<b>概述</b>：基于bootstrap前端技术的小说采集系统，手机浏览效果更佳。演示网站:http://www.020mk.cn<br>
+<b>概述</b>：基于bootstrap前端技术的小说采集系统，手机浏览效果更佳。演示网站:http://getlove.xyz<br>
 
 我本人是一个小说爱好者，在读小说的过程中，碰到n多个弹出广告，而本人又喜欢手机浏览，经过被无数次的弹出广告激怒以后，决心写自己的小说系统。<br>
 因一个人开发精力有限， 非常欢迎有志于开源软件开发具有分享精神的软件开发者和我一起开发。<br>
@@ -59,7 +59,7 @@ title ok
 <br>
 
 定时生成sitemap：
-http://www.020mk.cn/admin/sitemap.php<br>
+http://getlove.xyz/admin/sitemap.php<br>
 自动发表微博：
 http://www.020mk.cn/weibo/weibo_auto.php<br>
 http://www.020mk.cn/qqwb/qqwb_auto.php<br>
@@ -67,5 +67,5 @@ http://www.020mk.cn/qqwb/qqwb_auto.php<br>
 http://www.020mk.cn/admin/pick_seed.php<br>
 
 
-cron job:wget -q -O /dev/null "http://www.020mk.cn/admin/pick_seed.php"
+cron job:wget -q -O /dev/null "http://getlove.xyz/admin/pick_seed.php"
 
